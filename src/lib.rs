@@ -71,6 +71,25 @@ use std::{
 
 const READER_BUFFER_SIZE: usize = 16384;
 
+/// A data type that represents the libc stat type on windows, not stat64
+#[cfg(target_os = "windows")]
+#[derive(Copy, Clone)]
+#[repr(C)]
+#[allow(non_camel_case_types)]
+pub struct stat {
+    pub st_dev: libc::dev_t,
+    pub st_ino: libc::ino_t,
+    pub st_mode: u16,
+    pub st_nlink: libc::c_short,
+    pub st_uid: libc::c_short,
+    pub st_gid: libc::c_short,
+    pub st_rdev: libc::dev_t,
+    pub st_size: i32,
+    pub st_atime: libc::time_t,
+    pub st_mtime: libc::time_t,
+    pub st_ctime: libc::time_t,
+}
+
 /// Determine the ownership behavior when unpacking the archive.
 #[derive(Clone, Copy, Debug)]
 pub enum Ownership {
