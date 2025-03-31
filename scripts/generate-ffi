@@ -22,6 +22,8 @@ EOF
 
 bindgen \
     \
+    --rust-target "1.65.0" \
+    \
     --raw-line "#![allow(non_camel_case_types)]" \
     --raw-line "#[cfg(not(target_os = \"windows\"))]" \
     --raw-line "use libc::stat;" \
